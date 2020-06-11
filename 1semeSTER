@@ -1,0 +1,237 @@
+/*PROYECTO FINAL
+Laura Manuela Orjuela Hernandez
+Universidad Militar Nueva Granada.
+Ingeniería Mecatrónica.
+2019.
+*/
+
+#include <iostream>
+#include <iomanip>
+
+#define abono 50000;
+using namespace std;
+int main ()
+{
+	setlocale (LC_CTYPE, "spanish");
+	int seleccion=0, edad, numcuenta, opcionmenu, seleccion2 = 'a';
+	float usuario [2][1], contra [5], verificontra, verifiusuario,recarga, gastotal = 0;
+	double abonado = abono; 
+	char seleccion3;
+	int z=0, i=0,a,b, compratotal=0; //contadores
+	cout << "\n\tR A P P I\n";
+	while (seleccion !=3)
+	{
+		cout << "\n\tMENÚ PRINCIPAL\n\n";
+		cout << "1.\tNUEVO USUARIO\n2\tUSUARIO EXISTENTE\n3.\tSALIR\n\n";
+		cout << "Por favor, seleccione una de las opciones: ";
+		cin >> seleccion;
+		while ((seleccion < 1) || (seleccion > 3))
+		{
+			cout << "ERROR: Seleccione una de las opciones indicadas: ";
+			cin >> seleccion;
+		}
+		switch (seleccion)
+		{
+			case 1:
+			{	if (z == 3)
+				{
+				cout << "Lo sentimos, no pueden crearse más usuarios.";
+
+				}
+			else 
+				{
+				system("cls");
+					cout <<"\nPor favor, ingrese su edad: ";
+					cin >> edad;
+					if (edad <18 )
+					{
+						cout << "LO SENTIMOS, usted no puede crear una cuenta siendo menor de edad" << endl;
+						
+					}
+					else if (edad >= 100)
+					{
+						cout << "ERROR: Edad no válida. Será redirigido al menú principal" << endl;
+					}
+
+					else
+					{
+						cout << "\nPor favor, ingrese su número de cédula: ";
+						cin >> usuario[z][0];
+						cout << "\nPor favor, ingrese su contraseña: ";
+						cin >> contra[z];
+						cout << "\nIngrese su contraseña de nuevo: ";
+						cin >> verificontra;
+						while (contra[z] != verificontra)
+						{
+							cout << "\nERROR: LAS CONTRASEÑAS NO COINCIDEN\nPor favor, ingrese su contraseña:";
+							cin >> contra[z];
+							cout << "\nIngrese su contraseña de nuevo:";
+							cin >> verificontra;
+						}
+						cout.setf(ios::fixed);
+						cout << "\n\tEL USUARIO HA SIDO CREADO CON ÉXITO\n\nUSUARIO: " << setprecision(0) << usuario[z][0] << "\nCONTRASEÑA: " << contra[z] << endl;
+						cout << "\nPor crear su cuenta, usted acaba de recibir $" << abonado << "\n";
+						usuario[z][1] = abono;
+						z++;
+					
+					}
+					system("pause");
+				}
+				system("cls");
+					break;
+			}
+			case 2:
+
+			{	
+				cout << "\nUSUARIO: ";
+				cin >> verifiusuario;
+				while ((verifiusuario != usuario[0][0]) && (verifiusuario != usuario[1][0]) && (verifiusuario != usuario[2][0]))
+				{
+				
+					{	cout << "ERROR: El nombre de usuario NO existe.\nPor favor, cree un nuevo usuario [0] o intente de nuevo [1].";
+						cin >> i;
+						if (i == 0)
+						{
+							break;
+						}
+						else
+						{
+							cout << "\nUSUARIO: ";
+							cin >> verifiusuario;
+						}
+					}
+				
+				}
+				
+					cout << "\nCONTRASEÑA: ";
+					cin >> verificontra;
+					while ((verificontra != contra[0]) && (verificontra != contra[1]) && (verificontra != contra[2]))
+					{
+						cout << "ERROR: Contraseña incorrecta, intente de nuevo.";
+						cin >> verificontra;
+					}
+					for (i = 0; i < 2; i++)
+					{
+						if (verifiusuario == usuario[i][0])
+						{
+							numcuenta = i;
+						}
+
+					}
+					while (seleccion2 != 3)
+					{
+						
+					system("cls");
+					cout << "\n\tMENÚ DE USUARIO\n\n1.\tCOMPRAR/RECARGAR\n2.\tSOBRE EL USUARIO\n3.\tSALIR DEL USUARIO\n";
+					cout << "Por favor, seleccione una de las opciones indicadas: ";
+					cin >> seleccion2;
+
+					switch (seleccion2)
+					{
+				case (1):
+					{
+						cout << "\n\tTRANSACCIONES\n\tA. COMPRAR\n\tB. RECARGAR\n¿Qué desea realizar?: ";
+						cin >> seleccion3;
+						while ((seleccion3 != 'a') && (seleccion3 != 'b'))
+						{
+							cout << "\nERROR:Opción no válida.\nPor favor, seleccione alguna de las opciones:";
+							cin >> seleccion3;
+						}
+						switch (seleccion3)
+						{case 'a':
+
+							{
+							if (usuario[numcuenta][1] < 14500)
+							{
+								cout << "\nLO SENTIMOS: Usted no cuenta con saldo suficiente para hacer una compra.";
+								system("pause");
+									break;
+							}
+							cout << "\n\tM E N Ú  A C T U A L\n\n\n1. HAMBURGUESA EN COMBO (Papas y Gaseosa): $20000\n2. PIZZA TAMAÑO FAMILIAR: $23000\n3. LASAGNA SENCILLA: $14500" << endl;
+							cout << "\nSALDO ACTUAL: $" << usuario[numcuenta][1] << endl;
+							cout << "\nSELECCIONE ALGUNA DE LAS OPCIONES DEL MENÚ:";
+							cin >> opcionmenu;
+							while ((opcionmenu < 1) || (opcionmenu > 3))
+							{
+								cout << "\nERROR:Opción no válida.\nPor favor, seleccione alguna de las opciones del menú:";
+								cin >> opcionmenu;
+								
+							}
+							if ((usuario[numcuenta][1] - 14500 < 0))
+							{
+								cout << "\n\tERROR EN LA TRANSACCIÓN: No cuenta con el dinero suficiente para comprar este producto.";
+							}
+							else
+							{
+								cout << "\n\tTRANSACCIÓN EXITOSA";
+							switch (opcionmenu)
+							{
+							case 1:
+								{
+									usuario[numcuenta][1] -= 20000;
+									gastotal += 20000;
+									cout << "\nUSTED HA COMPRADO UNA HAMBURGUESA EN COMBO";
+									break;
+								}
+							case 2:
+								{
+								usuario[numcuenta][1] -= 23000;
+								gastotal += 23000;
+								cout << "\nUSTED HA COMPRADO UNA PIZZA TAMAÑO FAMILIAR";
+									break;
+								}
+							default:
+								{
+								usuario[numcuenta][1] -= 14500;
+								gastotal += 14500;
+								cout << "\nUSTED HA COMPRADO UNA LASAGNA SENCILLA";
+								break;
+								}
+							} 
+								compratotal++;
+								cout << "\nSALDO ACTUAL: $" << usuario[numcuenta][1] << endl;
+								system("pause");
+								break;
+							}
+						default:
+							{
+								cout << "\nSALDO ACTUAL: $" << usuario[numcuenta][1] << endl;
+								cout << "¿Cuánto dinero desea recargar?: $";
+								cin >> recarga;
+								while (recarga < 0)
+								{
+									cout << "ERROR: Valor erróneo. Por favor, ingrese un valor a agregar a la cuenta:";
+									cin >> recarga;
+								}
+								usuario[numcuenta][1] += recarga;
+								cout << "\t\nRECARGA EXITOSA\nSALDO ACTUAL: " << usuario[numcuenta][1] << endl;
+								system("pause");
+									break;
+							}
+							}
+						}
+						break;
+					}
+
+				case (2):
+				{	
+					cout << "\nINFORMACIÓN DEL USUARIO" << endl;
+					cout << "\n\nUSUARIO NÚMERO " << numcuenta+1;
+					cout << "\nCOMPRAS REALIZADAS: " << compratotal;
+					cout << "\nDINERO UTILIZADO:" << gastotal;
+					cout << "\nSALDO ACTUAL: " << usuario[numcuenta][1];
+					system("pause");
+					break;
+				}
+					} //SWITCH
+					}//MENÚ DE USUARIO
+					cout << "\nUsted ha salido de su cuenta exitosamente." << endl;
+			}//INGRESO DE USUARIO
+		} //MENÚ PRINCIPAL (CASOS)
+	
+	}
+
+	system("pause");
+	return 0;
+
+}
